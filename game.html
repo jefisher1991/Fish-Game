@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Fishy Game</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h1> Bubble Blast </h1>
+            <div class="col-md-12 charRow"> </div>
+        </div>
+        <div class="row" id="players">
+            <button type="button" class="btn btn-default btn-lg crab-btn button-text" id="myCrab"> </button>
+            <button type="button" class="btn btn-default btn-lg starfish-btn button-text" id="myStarFish"> </button>
+            <button type="button" class="btn btn-default btn-lg dolphin-btn button-text" id="myDolphin"> </button>
+            <button type="button" class="btn btn-default btn-lg turtle-btn button-text" id="myTurtle"> </button>
+        </div>
+        <div class="row" id="pickedPlayer">
+        </div>
+        <div class="row" id="enemies">
+        </div>
+        <div class="row" id="defender">
+        </div>
+        <div class="row">
+            <button id="attackButton" class="btn btn-danger btn-lg attackButton"></button>
+        </div>
+        <script type="text/javascript">
+        $(document).ready(function() {
+
+
+
+            function dolphin() {
+                this.name = "Flipper the Dolphin";
+                this.hp = 100;
+                this.type = "dolphin";
+                this.attackValue = 8;
+                this.specialPower = "goo";
+                this.attack = function(creatureObject) {
+                    this.hp -= creatureObject.attackValue;
+                    creatureObject.hp -= this.attackValue;
+                }
+            }
+
+            function turtle() {
+                this.name = "Chomp the Turtle";
+                this.hiddenValue =
+                    this.attackValue = 10;
+                this.hp = 150;
+                this.speicalPower = "camoflauge";
+                this.attack = function(creatureObject) {
+                    this.hp -= creatureObject.attackValue;
+                    creatureObject.hp -= this.attackValue;
+                }
+            }
+
+            function starfish() {
+                this.name = "Orion the Starfish";
+                this.type = "starfish";
+                this.attackValue = 15;
+                this.hp = "200";
+                this.specialPower = "flop";
+                this.attack = function(creatureObject) {
+                    this.hp -= creatureObject.attackValue;
+                    creatureObject.hp -= this.attackValue;
+                }
+            }
+
+            function crab() {
+                this.name = "Pinch the Crab";
+                this.type = "Crab";
+                this.attackValue = 20;
+                this.hp = "250";
+                this.specialPower = "pinch";
+                this.attack = function(creatureObject) {
+                    this.hp -= creatureObject.attackValue;
+                    creatureObject.hp -= this.attackValue;
+                }
+            }
+
+            var myDolphin = new dolphin();
+            var myTurtle = new turtle();
+            var myStarFish = new starfish();
+            var myCrab = new crab();
+
+
+// how do I make a click turn the creature into picked player or defender?
+
+            // $("#attackButton").click(function() {
+            //   if (pickedPlayer.hp <= 0) {
+            //     alert("awww you lost! poor " + pickedPlayer.name +" !!!!");
+            //   } 
+            //   if (defender.hp <= 0) {
+            //     alert("hey " + defender.name +", "+ "!!! you lost!!! yay!!!");
+            //   }
+            //   pickedPlayer.attack(defender);
+
+            // });
+
+// how to make this a dynamic function?
+
+            // moves them to the enemies catagory
+            var seaAnimals = [myCrab, myStarFish, myDolphin, myTurtle];
+            if ($('#myCrab').click()) {
+                $("#myCrab").click(function() {
+                    $("#players").html('<button type="button" class="btn btn-default btn-lg crab-btn " id="myCrab">' + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg starfish-btn" id="myStarFish">' +  '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg dolphin-btn" id="myDolphin">' + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg turtle-btn" id="myTurtle">' + '</button>');
+                });
+            }
+            if ($('#myStarFish').click()) {
+                $("#myStarFish").click(function() {
+                    $("#players").html('<button type="button" class="btn btn-default btn-lg starfish-btn" id="myStarFish">' + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg crab-btn" id="myCrab">' + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg dolphin-btn" id="myDolphin">' + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg turtle-btn" id="myTurtle">' +  '</button>');
+                });
+            }
+            if ($('#myDolphin').click()) {
+                $("#myDolphin").click(function() {
+                    $("#players").html('<button type="button" class="btn btn-default btn-lg dolphin-btn" id="myDolphin">' + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg starfish-btn" id="myStarFish">' + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg crab-btn" id="myCrab">' + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg turtle-btn" id="myTurtle">' +  '</button>');
+                });
+            }
+
+            if ($('#myTurtle').click()) {
+                $("#myTurtle").click(function() {
+                    $("#players").html('<button type="button" class="btn btn-default btn-lg turtle-btn" id="myTurtle">' + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg starfish-btn" id="myStarFish">' +  '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg dolphin-btn" id="myDolphin">' +  '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg crab-btn" id="myCrab">' +  '</button>');
+                });
+            }
+
+            // moves to defender catagory
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        });
+        </script>
+</body>
+
+</html>

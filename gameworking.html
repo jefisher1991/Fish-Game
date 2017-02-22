@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Fishy Game</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h1> Things that aren't fish fight </h1>
+            <div class="col-md-12 charRow"> </div>
+        </div>
+        <div class="row" id="pickedPlayer">
+            <button type="button" class="btn btn-default btn-lg" id="myHermitCrab"> Hermit Crab </button>
+            <button type="button" class="btn btn-default btn-lg" id="myStarFish"> Starfish </button>
+            <button type="button" class="btn btn-default btn-lg" id="mySnail"> Snail</button>
+            <button type="button" class="btn btn-default btn-lg" id="mySeaHorse"> Seahorse</button>
+        </div>
+        <div class="row">
+          <button id="attackButton" class="btn btn-danger btn-lg">ATTACK!</button>
+        </div>
+        <div class="row" id="enemies">
+        </div>
+        <div class="row" id="defender">
+        </div>
+        <script type="text/javascript">
+        $(document).ready(function() {
+
+          
+
+            function snail() {
+                this.name = "Snailie the Snail";
+                this.hp = 100;
+                this.type = "snail";
+                this.attackValue = 8;
+                this.specialPower = "goo";
+                this.attack = function(creatureObject) {
+                    this.hp -= creatureObject.attackValue;
+                    creatureObject.hp -= this.attackValue;
+                }
+            }
+
+            function seahorse() {
+                this.name = "Speedy the Seahorse";
+                this.hiddenValue = 
+                this.attackValue = 10;
+                this.hp = 150;
+                this.speicalPower = "lasso";
+                this.attack = function(creatureObject) {
+                    this.hp -= creatureObject.attackValue;
+                    creatureObject.hp -= this.attackValue;
+                }
+            }
+
+            function starfish() {
+                this.name = "Orion the Starfish";
+                this.type = "starfish";
+                this.attackValue = 15;
+                this.hp = "200";
+                this.specialPower = "fish flop";
+                this.attack = function(creatureObject) {
+                    this.hp -= creatureObject.attackValue;
+                    creatureObject.hp -= this.attackValue;
+                }
+            }
+
+            function hermitcrab() {
+                this.name = "Hitch the Hermit Crab";
+                this.type = "Hermit Crab";
+                this.attackValue = 20;
+                this.hp = "250";
+                this.specialPower = "pinch";
+                this.attack = function(creatureObject) {
+                    this.hp -= creatureObject.attackValue;
+                    creatureObject.hp -= this.attackValue;
+                }
+            }
+
+            var mySnail = new snail();
+            var mySeaHorse = new seahorse();
+            var myStarFish = new starfish();
+            var myHermitCrab = new hermitcrab();
+
+            
+
+            $("#attackButton").click(function() {
+              if (mySnail.hp <= 0) {
+                alert("awww you lost! poor snailie!!!!");
+              } 
+              if (mySeaHorse.hp <= 0) {
+                alert("hey speedy!!! you lost!!! yay!!!");
+              }
+              mySnail.attack(mySeaHorse);
+              console.log("Snailie's HP is: " + mySnail.hp + ". " + " Speedy's HP is: " + mySeaHorse.hp + "." + mySnail.attackValue);
+
+            });
+              /*
+             $("#attackButton").click(function() {
+              myStarFish.attack(mySeaHorse);
+              alert("myStarFish's features: " + myStarFish.hp + "mySeaHorse: " + mySeaHorse.hp);
+            });
+            */
+var seaAnimals = [myHermitCrab, myStarFish, mySnail, mySeaHorse];
+            if ($('#myHermitCrab').click()) {
+                $("#myHermitCrab").click(function() {
+                    $("#pickedPlayer").html('<button type="button" class="btn btn-default btn-lg" id="myHermitCrab">' + seaAnimals[0].name + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg" id="myStarFish">' + seaAnimals[1].name + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg" id="mySnail">' + seaAnimals[2].name + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg" id="mySeaHorse">' + seaAnimals[3].name + '</button>');
+                });
+            }
+            if ($('#myStarFish').click()) {
+                $("#myStarFish").click(function() {
+                    $("#pickedPlayer").html('<button type="button" class="btn btn-default btn-lg" id="myStarFish">' + seaAnimals[1].name + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg" id="myHermitCrab">' + seaAnimals[0].name + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg" id="mySnail">' + seaAnimals[2].name + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg" id="mySeaHorse">' + seaAnimals[3].name + '</button>');
+                });
+            }
+            if ($('#mySnail').click()) {
+                $("#mySnail").click(function() {
+                    $("#pickedPlayer").html('<button type="button" class="btn btn-default btn-lg" id="mySnail">' + seaAnimals[2].name + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg" id="myStarFish">' + seaAnimals[1].name + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg" id="myHermitCrab">' + seaAnimals[0].name + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg" id="mySeaHorse">' + seaAnimals[3].name + '</button>');
+                });
+            }
+
+            if ($('#mySeaHorse').click()) {
+                $("#mySeaHorse").click(function() {
+                    $("#pickedPlayer").html('<button type="button" class="btn btn-default btn-lg" id="mySeaHorse">' + seaAnimals[3].name + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg" id="myStarFish">' + seaAnimals[1].name + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg" id="mySnail">' + seaAnimals[2].name + '</button>');
+                    $("#enemies").append('<button type="button" class="btn btn-default btn-lg" id="myHermitCrab">' + seaAnimals[0].name + '</button>');
+                });
+            }
+
+
+
+// if X is clicked and picked player !=   than......
+
+ 
+           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        });
+        </script>
+</body>
+
+</html>
